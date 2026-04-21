@@ -1,4 +1,5 @@
 import { spawn } from 'node:child_process';
+import { dirname } from 'node:path';
 import { fail } from './fail.js';
 
 export function run(cmd, args, { cwd, stdio = 'pipe', env } = {}) {
@@ -26,11 +27,31 @@ export async function mustGit(args, opts = {}) {
 }
 
 export async function repoRoot(cwd = process.cwd()) {
-  const r = await git(['rev-parse', '--show-toplevel'], { cwd });
-  if (r.code !== 0) {
+  // Resolve the *main* worktree's root, so wbaum behaves the same when invoked
+  // from inside a linked worktree (e.g. one it created under .wbaum/).
+  // --git-common-dir points at the shared .git directory of the main worktree
+  // for both the main checkout and any linked worktrees.
+  const common = await git(
+    ['rev-parse', '--path-format=absolute', '--git-common-dir'],
+    { cwd },
+  );
+  if (common.code !== 0) {
     fail('Not inside a git repository.', { hint: 'Run wbaum from within a git repo.' });
   }
-  return r.stdout.trim();
+  const commonDir = common.stdout.trim();
+  if (!commonDir) {
+    fail('Not inside a git repository.', { hint: 'Run wbaum from within a git repo.' });
+  }
+
+  // For a standard repo, --git-common-dir is "<main>/.git"; its parent is the
+  // main worktree root. For bare repos there is no working tree, which wbaum
+  // doesn't support — surface a clear error instead of silently misbehaving.
+  const isBare = await git(['rev-parse', '--is-bare-repository'], { cwd });
+  if (isBare.code === 0 && isBare.stdout.trim() === 'true') {
+    fail('wbaum does not support bare repositories.');
+  }
+
+  return dirname(commonDir);
 }
 
 export async function currentBranch(cwd) {
