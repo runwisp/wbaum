@@ -1,8 +1,8 @@
 import { ui, printBanner, spinner } from '../ui.js';
-import { mustGit, repoRoot } from '../util/git.js';
+import { mustGit, mainWorktree } from '../util/git.js';
 
 export async function prune() {
-  const root = await repoRoot();
+  const root = await mainWorktree();
   printBanner();
   ui.newline();
   const sp = spinner('Pruning stale worktree records').start();

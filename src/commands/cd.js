@@ -4,7 +4,7 @@ import pc from 'picocolors';
 import { ui, printBanner } from '../ui.js';
 import { parseArgs } from '../util/args.js';
 import { fail } from '../util/fail.js';
-import { repoRoot, listWorktrees } from '../util/git.js';
+import { mainWorktree, listWorktrees } from '../util/git.js';
 import { WORKTREE_DIR } from '../util/config.js';
 
 export async function cd(argv) {
@@ -12,7 +12,7 @@ export async function cd(argv) {
   const [branch] = positional;
   if (!branch) fail('Missing branch name.', { hint: 'Usage: wbaum cd <branch>' });
 
-  const root = await repoRoot();
+  const root = await mainWorktree();
   const target = join(root, WORKTREE_DIR, branch);
   const match = (await listWorktrees(root)).find((w) => w.path === target || w.branch === branch);
   if (!match) fail(`No worktree for ${pc.bold(branch)}`, { hint: 'wbaum open ' + branch });

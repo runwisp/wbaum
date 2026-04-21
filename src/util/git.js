@@ -33,6 +33,18 @@ export async function repoRoot(cwd = process.cwd()) {
   return r.stdout.trim();
 }
 
+// Returns the absolute path of the main worktree (the repo root that owns
+// the .git directory), even when invoked from inside a linked worktree.
+export async function mainWorktree(cwd = process.cwd()) {
+  const r = await mustGit(['worktree', 'list', '--porcelain'], { cwd });
+  const first = r.stdout.split(/\n\n+/).find(Boolean) ?? '';
+  for (const line of first.split('\n')) {
+    if (line.startsWith('worktree ')) return line.slice('worktree '.length).trim();
+  }
+  // Fallback: ask git directly
+  return (await repoRoot(cwd));
+}
+
 export async function currentBranch(cwd) {
   const r = await git(['symbolic-ref', '--quiet', '--short', 'HEAD'], { cwd });
   if (r.code === 0) return r.stdout.trim();

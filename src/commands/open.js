@@ -5,7 +5,7 @@ import pc from 'picocolors';
 import { ui, spinner, printBanner } from '../ui.js';
 import { parseArgs } from '../util/args.js';
 import { fail } from '../util/fail.js';
-import { git, repoRoot, currentBranch, branchExists, listWorktrees } from '../util/git.js';
+import { git, mainWorktree, currentBranch, branchExists, listWorktrees } from '../util/git.js';
 import { readConfig, WORKTREE_DIR } from '../util/config.js';
 
 export async function open(argv) {
@@ -21,7 +21,7 @@ export async function open(argv) {
   printBanner();
   ui.newline();
 
-  const root = await repoRoot();
+  const root = await mainWorktree();
   const base = options.from || (await currentBranch(root));
   const worktreeRel = join(WORKTREE_DIR, branch);
   const worktreeAbs = join(root, worktreeRel);

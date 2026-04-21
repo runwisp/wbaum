@@ -3,7 +3,7 @@ import pc from 'picocolors';
 import { ui, spinner, printBanner } from '../ui.js';
 import { parseArgs } from '../util/args.js';
 import { fail } from '../util/fail.js';
-import { git, repoRoot, listWorktrees } from '../util/git.js';
+import { git, mainWorktree, listWorktrees } from '../util/git.js';
 import { WORKTREE_DIR } from '../util/config.js';
 
 export async function remove(argv) {
@@ -16,7 +16,7 @@ export async function remove(argv) {
   printBanner();
   ui.newline();
 
-  const root = await repoRoot();
+  const root = await mainWorktree();
   const worktreeAbs = join(root, WORKTREE_DIR, branch);
   const all = await listWorktrees(root);
   const match = all.find((w) => w.path === worktreeAbs || w.branch === branch);

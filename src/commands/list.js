@@ -1,11 +1,11 @@
 import { relative, sep } from 'node:path';
 import pc from 'picocolors';
 import { ui, printBanner } from '../ui.js';
-import { repoRoot, listWorktrees } from '../util/git.js';
+import { mainWorktree, listWorktrees } from '../util/git.js';
 import { WORKTREE_DIR } from '../util/config.js';
 
 export async function list() {
-  const root = await repoRoot();
+  const root = await mainWorktree();
   const all = await listWorktrees(root);
   const managed = all.filter((w) => {
     const rel = relative(root, w.path);
