@@ -1,0 +1,49 @@
+{
+  "name": "wbaum",
+  "version": "0.1.0",
+  "description": "A delightful git worktree manager. Spin up isolated branch workspaces with one command, run per-project setup automatically, and jump straight into a ready-to-code shell.",
+  "keywords": [
+    "git",
+    "git-worktree",
+    "worktree",
+    "branch",
+    "workspace",
+    "cli",
+    "devtools",
+    "developer-experience",
+    "monorepo",
+    "productivity",
+    "wbaum"
+  ],
+  "homepage": "https://github.com/runwisp/wbaum#readme",
+  "bugs": {
+    "url": "https://github.com/runwisp/wbaum/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/runwisp/wbaum.git"
+  },
+  "license": "GPL-3.0-or-later",
+  "author": "runwisp",
+  "type": "module",
+  "bin": {
+    "wbaum": "./bin/wbaum.js"
+  },
+  "files": [
+    "bin",
+    "src",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "test": "node --test \"test/*.test.js\"",
+    "start": "node bin/wbaum.js"
+  },
+  "dependencies": {
+    "picocolors": "^1.1.1",
+    "yaml": "^2.6.1"
+  }
+}

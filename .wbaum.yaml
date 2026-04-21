@@ -1,0 +1,3 @@
+setup:
+  - echo "Welcome to the $WBAUM_BRANCH worktree"
+  - echo "Root: $WBAUM_WORKTREE"

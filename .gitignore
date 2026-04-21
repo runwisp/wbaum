@@ -1,0 +1,4 @@
+node_modules/
+.wbaum/
+*.log
+.DS_Store
