@@ -1,6 +1,6 @@
 {
   "name": "wbaum",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "A delightful git worktree manager. Spin up isolated branch workspaces with one command, run per-project setup automatically, and jump straight into a ready-to-code shell.",
   "keywords": [
     "git",

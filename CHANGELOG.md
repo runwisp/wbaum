@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-04-25
+
+### Changed
+
+- `wbaum prune` now also removes worktrees whose branches have been merged
+  into the default branch (detected via `origin/HEAD`, falling back to local
+  or remote `main`/`master`) and deletes those merged branches. Both regular
+  merges and squash/rebase merges are detected (the latter via a patch-id
+  check against upstream, matching the typical GitHub "Squash and merge"
+  workflow). Locked worktrees and the default-branch worktree itself are
+  always skipped. New flags: `--dry-run` (`-n`), `--force` (`-f`), and
+  `--keep-branches`.
+
 ## [0.1.2] - 2026-04-21
 
 ### Fixed

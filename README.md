@@ -101,7 +101,7 @@ wbaum open <branch> [--from <base>] [--no-setup] [--no-shell]
 wbaum list
 wbaum cd <branch>
 wbaum remove <branch> [--force] [--keep-branch]
-wbaum prune
+wbaum prune [--dry-run] [--force] [--keep-branches]
 wbaum --help | --version
 ```
 
@@ -140,7 +140,15 @@ Remove the worktree and delete the branch. Flags:
 
 ### `prune`
 
-Runs `git worktree prune -v` to clean up stale administrative records.
+Removes worktrees whose branches have been merged into the default branch, deletes those branches, and then runs `git worktree prune -v` to clean up stale administrative records.
+
+Detects both regular merges (strict ancestor) **and** squash/rebase merges (the branch's cumulative patch is already upstream — the typical GitHub "Squash and merge" workflow). The default branch is resolved from `origin/HEAD`, falling back to a local or remote `main`/`master`. Locked worktrees and the default-branch worktree itself are never touched.
+
+Flags:
+
+- `--dry-run` (`-n`) — list what would be removed without changing anything
+- `--force` (`-f`) — force-remove dirty worktrees and force-delete branches
+- `--keep-branches` — remove the worktrees but keep the merged branches around
 
 ---
 

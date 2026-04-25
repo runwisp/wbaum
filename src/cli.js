@@ -15,7 +15,7 @@ const COMMANDS = {
   rm: { run: remove, hidden: true },
   cd: { run: cd, summary: 'Enter an existing worktree in a subshell', usage: 'wbaum cd <branch>' },
   enter: { run: cd, hidden: true },
-  prune: { run: prune, summary: 'Prune stale worktree records', usage: 'wbaum prune' },
+  prune: { run: prune, summary: 'Remove merged worktrees & prune stale records', usage: 'wbaum prune [--dry-run] [--force] [--keep-branches]' },
 };
 
 const ALIASES = { '-h': 'help', '--help': 'help', '-v': 'version', '--version': 'version' };
