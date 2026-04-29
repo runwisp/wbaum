@@ -27,7 +27,7 @@
   "author": "runwisp",
   "type": "module",
   "bin": {
-    "wbaum": "./bin/wbaum.js"
+    "wbaum": "bin/wbaum.js"
   },
   "files": [
     "bin",
