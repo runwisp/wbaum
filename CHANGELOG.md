@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-04-29
+
+### Changed
+
+- Worktrees are now stored under `.worktrees/` instead of `.wbaum/`. Existing worktrees in `.wbaum/` should be moved manually.
+
 ## [0.2.0] - 2026-04-25
 
 ### Changed
@@ -27,7 +33,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `wbaum list` and `wbaum prune` now resolve the main repository root via
   `git worktree list --porcelain` instead of `git rev-parse --show-toplevel`,
   so they work correctly when invoked from inside a linked worktree (e.g. from
-  within `.wbaum/<branch>`). Previously, `list` reported "No wbaum worktrees
+  within `.worktrees/<branch>`). Previously, `list` reported "No wbaum worktrees
   yet" and `prune`/`remove`/`cd`/`open` operated against the wrong root.
 - Applied the same fix to `wbaum cd`, `wbaum open`, and `wbaum remove` for
   consistent behavior across commands.
@@ -42,12 +48,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Initial release of `wbaum`, a CLI for managing git worktrees under a
-  dedicated `.wbaum/` directory.
+  dedicated `.worktrees/` directory.
 - `open`, `list`, `cd`, `remove`, and `prune` commands for creating,
   entering, listing, cleaning up, and removing worktrees.
 - Optional `.wbaum.yaml` `setup:` hooks that run project-specific commands in
   newly created worktrees.
-- Automatic `.gitignore` management for `.wbaum/`, shell handoff into opened
+- Automatic `.gitignore` management for `.worktrees/`, shell handoff into opened
   worktrees, and a lightweight colored terminal UI.
 - Initial automated tests covering argument parsing and `.wbaum.yaml`
   configuration loading.

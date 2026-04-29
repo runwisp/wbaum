@@ -4,7 +4,7 @@ import YAML from 'yaml';
 
 export const CONFIG_FILENAME = '.wbaum.yaml';
 export const ALT_CONFIG_FILENAMES = ['.wbaum.yml'];
-export const WORKTREE_DIR = '.wbaum';
+export const WORKTREE_DIR = '.worktrees';
 
 export async function readConfig(repoRoot) {
   const candidates = [CONFIG_FILENAME, ...ALT_CONFIG_FILENAMES];

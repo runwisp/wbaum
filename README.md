@@ -24,7 +24,7 @@ Git worktrees are one of the most underused superpowers in git. They let you che
 
 - 🌳 **One command to go** — `wbaum open <branch>` creates the worktree, runs setup, and drops you in.
 - ⚙️ **Zero-config, config-optional** — add a `.wbaum.yaml` and setup (install, link env files, seed DBs) runs automatically every time.
-- 🧘 **Stays out of your way** — all worktrees live under `.wbaum/`, auto-added to `.gitignore`, never polluting your main checkout.
+- 🧘 **Stays out of your way** — all worktrees live under `.worktrees/`, auto-added to `.gitignore`, never polluting your main checkout.
 - 🧹 **Clean teardown** — `wbaum rm <branch>` removes the worktree *and* the branch in one step.
 - 🪄 **Zero install** — works through `bunx` and `npx`. No global install needed.
 - 🎨 **Cool, simple TUI** — colorful output, spinners, clean tables. No noise, no ceremony.
@@ -65,8 +65,8 @@ wbaum open feature/login
 This will:
 
 1. Create a new branch `feature/login` based on the current branch.
-2. Add a git worktree at `./.wbaum/feature/login`.
-3. Append `.wbaum/` to `.gitignore` (once, if missing).
+2. Add a git worktree at `./.worktrees/feature/login`.
+3. Append `.worktrees/` to `.gitignore` (once, if missing).
 4. Run every command in `.wbaum.yaml`'s `setup:` list inside the new worktree.
 5. Launch your `$SHELL` in that directory so you can start working immediately.
 
